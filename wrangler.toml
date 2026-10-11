@@ -15,9 +15,6 @@ run_worker_first = ["/api/*"]
 [observability]
 enabled = false
 
-[ai]
-binding = "AI"
-
 [vars]
 APP_ENV = "dev"
 BETTER_AUTH_URL = "https://reachlens.sriramkirand.workers.dev/"
@@ -34,7 +31,7 @@ binding = "IMAGES"
 bucket_name = "reachlens-images"
 
 [[queues.producers]]
-binding = "d371d2198cda45078dc5b72f45ccf60d"
+binding = "EXTRACT_QUEUE"
 queue = "reachlens-extract"
 
 [[queues.consumers]]
@@ -58,7 +55,6 @@ crons = ["17 3 * * *"] # daily retention sweep
 [env.staging]
 name = "reachlens-staging"
 vars = { APP_ENV = "staging", BETTER_AUTH_URL = "https://reachlens-staging.example.workers.dev", MAX_UPLOAD_BYTES = "10485760" }
-ai = { binding = "AI" }
 assets = { directory = "./dist/client", binding = "ASSETS", not_found_handling = "single-page-application", run_worker_first = ["/api/*"] }
 triggers = { crons = ["17 3 * * *"] }
 d1_databases = [{ binding = "DB", database_name = "reachlens-staging", database_id = "REPLACE_STAGING_ID", migrations_dir = "migrations" }]
@@ -70,7 +66,6 @@ unsafe = { bindings = [{ name = "RATE_LIMITER", type = "ratelimit", namespace_id
 [env.production]
 name = "reachlens"
 vars = { APP_ENV = "production", BETTER_AUTH_URL = "https://reachlens.example.com", MAX_UPLOAD_BYTES = "10485760" }
-ai = { binding = "AI" }
 assets = { directory = "./dist/client", binding = "ASSETS", not_found_handling = "single-page-application", run_worker_first = ["/api/*"] }
 triggers = { crons = ["17 3 * * *"] }
 d1_databases = [{ binding = "DB", database_name = "reachlens-prod", database_id = "REPLACE_PROD_ID", migrations_dir = "migrations" }]
