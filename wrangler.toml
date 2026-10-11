@@ -13,14 +13,14 @@ not_found_handling = "single-page-application"
 run_worker_first = ["/api/*"]
 
 [observability]
-enabled = true
+enabled = false
 
 [ai]
 binding = "AI"
 
 [vars]
 APP_ENV = "dev"
-BETTER_AUTH_URL = "http://localhost:5173"
+BETTER_AUTH_URL = "https://reachlens.sriramkirand.workers.dev/"
 MAX_UPLOAD_BYTES = "10485760"
 
 [[d1_databases]]
